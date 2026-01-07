@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c5guhdlqjsxf1"]
 
-[ext_resource type="Script" uid="uid://d343kwp27pcd2" path="res://leaf.gd" id="1_p3lty"]
+[ext_resource type="Script" uid="uid://d343kwp27pcd2" path="res://Sweepgame resources/leaf.gd" id="1_p3lty"]
 [ext_resource type="Texture2D" uid="uid://xmybwnd4tdwh" path="res://Art/Leaves/pixel-art-green-leaf-isolated-on-transparent-background-png.png" id="2_qihfy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qgvdh"]

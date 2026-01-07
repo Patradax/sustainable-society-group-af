@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bk5apypobfj8d"]
 
-[ext_resource type="Script" uid="uid://dxy32ou8t1jcm" path="res://rake.gd" id="1_d2ylu"]
+[ext_resource type="Script" uid="uid://dxy32ou8t1jcm" path="res://Sweepgame resources/rake.gd" id="1_d2ylu"]
 [ext_resource type="Texture2D" uid="uid://hqhf7hds62xn" path="res://Art/selfmade/Imran_Haris/Rake.png" id="1_k7ni1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d2ylu"]

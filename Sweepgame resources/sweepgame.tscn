@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1fswq4twcgmt"]
+
+[ext_resource type="Script" uid="uid://durrbd1jpil3f" path="res://Sweepgame resources/sweepgame.gd" id="1_s0i5v"]
+[ext_resource type="PackedScene" uid="uid://bk5apypobfj8d" path="res://Sweepgame resources/rake.tscn" id="2_5dlpf"]
+[ext_resource type="PackedScene" uid="uid://c5guhdlqjsxf1" path="res://Sweepgame resources/leaf.tscn" id="3_55v16"]
+
+[node name="sweep" type="Node2D"]
+script = ExtResource("1_s0i5v")
+
+[node name="rake" parent="." instance=ExtResource("2_5dlpf")]
+position = Vector2(932, 341)
+
+[node name="leaf" parent="." instance=ExtResource("3_55v16")]
+position = Vector2(456.99997, 483.99997)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 817.0
+offset_top = 113.0
+offset_right = 1045.0
+offset_bottom = 136.0
+text = "Press \"A\" to spawn a new leaf"
