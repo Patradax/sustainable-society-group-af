@@ -7,6 +7,6 @@ func _process(_delta: float) -> void:
 		spawn_leaf()
 
 func spawn_leaf():
-	var leaf = leaf_scene.instantiate()
+	var leaf = leaf_scene.instantiate() # spawns leaf at mouse position
 	leaf.global_position = get_global_mouse_position()
 	add_child(leaf)
