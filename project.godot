@@ -19,3 +19,17 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+
+[global_group]
+
+leaf=""
+
+[layer_names]
+
+2d_physics/layer_1="player_interact"
+2d_physics/layer_2="leaf"
+2d_physics/layer_3="rake"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

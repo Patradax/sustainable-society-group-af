@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1fswq4twcgmt"]
+
+[ext_resource type="PackedScene" uid="uid://c5guhdlqjsxf1" path="res://leaf.tscn" id="1_ivamr"]
+[ext_resource type="PackedScene" uid="uid://bk5apypobfj8d" path="res://rake.tscn" id="2_pktxe"]
+
+[node name="sweep" type="Node2D"]
+
+[node name="rake" parent="." instance=ExtResource("2_pktxe")]
+position = Vector2(932, 341)
+
+[node name="leaf" parent="." instance=ExtResource("1_ivamr")]
+position = Vector2(456.99997, 483.99997)
+scale = Vector2(0.05, 0.05)

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bk5apypobfj8d"]
+
+[ext_resource type="Script" uid="uid://dxy32ou8t1jcm" path="res://rake.gd" id="1_d2ylu"]
+[ext_resource type="Texture2D" uid="uid://hqhf7hds62xn" path="res://Art/selfmade/Imran_Haris/Rake.png" id="1_k7ni1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d2ylu"]
+height = 77.87798
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wjylf"]
+radius = 14.0
+
+[node name="rake" type="CharacterBody2D"]
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_d2ylu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_k7ni1")
+
+[node name="holder" type="CollisionShape2D" parent="."]
+position = Vector2(4.9999995, -5)
+rotation = 0.7086037
+shape = SubResource("CapsuleShape2D_d2ylu")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="sweeper" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-15, 14)
+shape = SubResource("CircleShape2D_wjylf")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
