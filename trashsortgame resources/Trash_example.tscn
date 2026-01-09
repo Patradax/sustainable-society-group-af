@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqwsalbepiq05"]
 
-[ext_resource type="Script" uid="uid://cl2nrbv5kybg6" path="res://trashsortgame resources/trash_example.gd" id="1_gxpla"]
+[ext_resource type="Script" uid="uid://citv1grl5jtev" path="res://trashsortgame resources/trashtest2.gd" id="1_gxpla"]
 [ext_resource type="Texture2D" uid="uid://vpndphpx1ecf" path="res://icon.svg" id="1_rr7df"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rp4vt"]
