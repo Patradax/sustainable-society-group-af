@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://c67ghrs7e12d6"]
+
+[ext_resource type="Script" uid="uid://dxy32ou8t1jcm" path="res://Sweepgame resources/rake.gd" id="1_d2ylu"]
+[ext_resource type="Texture2D" uid="uid://hqhf7hds62xn" path="res://Art/selfmade/Imran_Haris/Rake.png" id="1_k7ni1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d2ylu"]
+radius = 23.211708
+height = 80.698074
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d2ylu"]
+size = Vector2(30, 27)
+
+[node name="rake" type="CharacterBody2D"]
+collision_mask = 0
+input_pickable = true
+script = ExtResource("1_d2ylu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_k7ni1")
+
+[node name="holder" type="CollisionShape2D" parent="."]
+position = Vector2(3.0000005, -5)
+rotation = 0.7086037
+shape = SubResource("CapsuleShape2D_d2ylu")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -1)
+collision_layer = 4
+collision_mask = 2
+input_pickable = false
+
+[node name="sweeper" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-17, 15.5)
+shape = SubResource("RectangleShape2D_d2ylu")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
