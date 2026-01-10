@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://yned2ibt5vfl"]
+[gd_scene load_steps=7 format=3 uid="uid://yned2ibt5vfl"]
 
 [ext_resource type="Script" uid="uid://tkdqk53ipjb4" path="res://trashsortgame resources/trashsortgame.gd" id="1_a7gly"]
-[ext_resource type="PackedScene" uid="uid://dyswodmebjxcm" path="res://trashsortgame resources/trash.tscn" id="1_dpm72"]
 [ext_resource type="Texture2D" uid="uid://vpndphpx1ecf" path="res://icon.svg" id="2_slcpe"]
 [ext_resource type="Script" uid="uid://dcd5ebyd6lnpf" path="res://trashsortgame resources/binscript.gd" id="4_cxbqt"]
 
@@ -16,10 +15,6 @@ size = Vector2(320, 128)
 
 [node name="Trashsortgame" type="Node2D"]
 script = ExtResource("1_a7gly")
-
-[node name="trash" parent="." instance=ExtResource("1_dpm72")]
-position = Vector2(832, 312)
-collision_mask = 40
 
 [node name="borders" type="Node2D" parent="."]
 
@@ -113,6 +108,21 @@ flip_v = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="trashcan"]
 position = Vector2(96, 0)
 shape = SubResource("RectangleShape2D_cxbqt")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 817.0
+offset_top = 113.0
+offset_right = 1045.0
+offset_bottom = 136.0
+text = "Press \"A\" to spawn a new trash"
 
 [connection signal="body_entered" from="recyclebin" to="." method="_on_recyclebin_body_entered"]
 [connection signal="body_entered" from="trashcan" to="." method="_on_trashcan_body_entered"]
