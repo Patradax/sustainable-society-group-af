@@ -1,0 +1,118 @@
+[gd_scene load_steps=8 format=3 uid="uid://yned2ibt5vfl"]
+
+[ext_resource type="Script" uid="uid://tkdqk53ipjb4" path="res://trashsortgame resources/trashsortgame.gd" id="1_a7gly"]
+[ext_resource type="PackedScene" uid="uid://dyswodmebjxcm" path="res://trashsortgame resources/trash.tscn" id="1_dpm72"]
+[ext_resource type="Texture2D" uid="uid://vpndphpx1ecf" path="res://icon.svg" id="2_slcpe"]
+[ext_resource type="Script" uid="uid://dcd5ebyd6lnpf" path="res://trashsortgame resources/binscript.gd" id="4_cxbqt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_slcpe"]
+size = Vector2(2136, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a7gly"]
+size = Vector2(88, 1296)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxbqt"]
+size = Vector2(320, 128)
+
+[node name="Trashsortgame" type="Node2D"]
+script = ExtResource("1_a7gly")
+
+[node name="trash" parent="." instance=ExtResource("1_dpm72")]
+position = Vector2(832, 312)
+collision_mask = 40
+
+[node name="borders" type="Node2D" parent="."]
+
+[node name="floor" type="StaticBody2D" parent="borders"]
+position = Vector2(64, 1024)
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="borders/floor"]
+position = Vector2(1000, 32)
+scale = Vector2(16.625, 0.5)
+texture = ExtResource("2_slcpe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="borders/floor"]
+position = Vector2(908, 32)
+shape = SubResource("RectangleShape2D_slcpe")
+
+[node name="wall2" type="StaticBody2D" parent="borders"]
+position = Vector2(40, 568)
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="borders/wall2"]
+position = Vector2(-12, -92.00006)
+scale = Vector2(0.56250006, 8.9375)
+texture = ExtResource("2_slcpe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="borders/wall2"]
+position = Vector2(-20, -112)
+shape = SubResource("RectangleShape2D_a7gly")
+
+[node name="wall1" type="StaticBody2D" parent="borders"]
+position = Vector2(1920, 624)
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="borders/wall1"]
+position = Vector2(-19.99997, -92.00006)
+scale = Vector2(0.6874996, 8.9375)
+texture = ExtResource("2_slcpe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="borders/wall1"]
+position = Vector2(-20, -112)
+shape = SubResource("RectangleShape2D_a7gly")
+
+[node name="ceiling" type="StaticBody2D" parent="borders"]
+position = Vector2(-88, 0)
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="borders/ceiling"]
+position = Vector2(1000, 32)
+scale = Vector2(16.625, 0.5)
+texture = ExtResource("2_slcpe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="borders/ceiling"]
+position = Vector2(1004, 32)
+shape = SubResource("RectangleShape2D_slcpe")
+
+[node name="recyclebin" type="Area2D" parent="."]
+position = Vector2(192, 960)
+script = ExtResource("4_cxbqt")
+bin_type = 1
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="recyclebin"]
+position = Vector2(96, 0)
+scale = Vector2(2.5, 1)
+texture = ExtResource("2_slcpe")
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="recyclebin"]
+position = Vector2(96, 0)
+shape = SubResource("RectangleShape2D_cxbqt")
+
+[node name="trashcan" type="Area2D" parent="."]
+position = Vector2(1536, 960)
+script = ExtResource("4_cxbqt")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="trashcan"]
+position = Vector2(96, 0)
+scale = Vector2(2.5, 1)
+texture = ExtResource("2_slcpe")
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="trashcan"]
+position = Vector2(96, 0)
+shape = SubResource("RectangleShape2D_cxbqt")
+
+[connection signal="body_entered" from="recyclebin" to="." method="_on_recyclebin_body_entered"]
+[connection signal="body_entered" from="trashcan" to="." method="_on_trashcan_body_entered"]

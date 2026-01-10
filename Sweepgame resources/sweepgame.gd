@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var leaf_scene = preload("res://leaf.tscn")
+@onready var leaf_scene = preload("res://Sweepgame resources/leaf.tscn")
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("A"):

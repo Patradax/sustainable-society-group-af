@@ -37,6 +37,9 @@ A={
 2d_physics/layer_1="player_interact"
 2d_physics/layer_2="leaf"
 2d_physics/layer_3="rake"
+2d_physics/layer_4="wall"
+2d_physics/layer_5="trash"
+2d_physics/layer_6="trashcan"
 
 [rendering]
 
