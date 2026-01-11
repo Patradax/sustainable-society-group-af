@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8m84eoav7n24"]
+
+[ext_resource type="Script" uid="uid://cfyd0ylpuv74s" path="res://rivertrash.gd" id="1_8n2e1"]
+[ext_resource type="Texture2D" uid="uid://vpndphpx1ecf" path="res://icon.svg" id="1_xgo7o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8n2e1"]
+radius = 64.0
+
+[node name="rivertrash" type="CharacterBody2D"]
+script = ExtResource("1_8n2e1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xgo7o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8n2e1")
