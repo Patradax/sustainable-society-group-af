@@ -7,17 +7,17 @@ func _process(_delta: float) -> void:
 		spawn_trash()
 
 func spawn_trash():
-	var trash = trash_scene.instantiate() # spawns leaf at mouse position
+	var trash = trash_scene.instantiate() # spawns trash at mouse position
 	trash.global_position = get_global_mouse_position()
 	add_child(trash)
 
-
+# funtions below work the same, only different category of trash
 func _on_trashcan_body_entered(body: Node2D) -> void:
 	print("Something in trash can")
 	if body.trashtype == $trashcan.bin_type:
 		print("right bin")
 	else:
-		print("wrong fucking bin")
+		print("wrong bin bin")
 
 func _on_recyclebin_body_entered(body: Node2D) -> void:
 	print("Something in recycle bin")
