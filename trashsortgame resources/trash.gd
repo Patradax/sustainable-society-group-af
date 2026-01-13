@@ -4,6 +4,17 @@ var dragging : bool = false
 enum trashchoice {recycle, trash}
 @export var trashtype : trashchoice
 
+
+func _ready() -> void:
+	var choice = randi_range(1,2)
+	if choice == 1:
+		trashtype = trashchoice.recycle
+		$Sprite2D.modulate = Color.SEA_GREEN
+	elif choice == 0:
+		trashtype = trashchoice.trash
+		$Sprite2D.modulate = Color.DARK_VIOLET
+	
+
 func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if dragging:

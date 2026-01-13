@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://yned2ibt5vfl"]
+[gd_scene load_steps=7 format=3 uid="uid://yned2ibt5vfl"]
 
 [ext_resource type="Script" uid="uid://tkdqk53ipjb4" path="res://trashsortgame resources/trashsortgame.gd" id="1_a7gly"]
-[ext_resource type="PackedScene" uid="uid://dyswodmebjxcm" path="res://trashsortgame resources/trash.tscn" id="1_dpm72"]
 [ext_resource type="Texture2D" uid="uid://vpndphpx1ecf" path="res://icon.svg" id="2_slcpe"]
 [ext_resource type="Script" uid="uid://dcd5ebyd6lnpf" path="res://trashsortgame resources/binscript.gd" id="4_cxbqt"]
 
@@ -16,10 +15,6 @@ size = Vector2(320, 128)
 
 [node name="Trashsortgame" type="Node2D"]
 script = ExtResource("1_a7gly")
-
-[node name="trash" parent="." instance=ExtResource("1_dpm72")]
-position = Vector2(832, 312)
-collision_mask = 40
 
 [node name="borders" type="Node2D" parent="."]
 

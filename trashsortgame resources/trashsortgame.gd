@@ -24,4 +24,4 @@ func _on_recyclebin_body_entered(body: Node2D) -> void:
 	if body.trashtype == $recyclebin.bin_type:
 		print("right bin")
 	else:
-		print("wrong fucking bin")
+		print("wrong bin")

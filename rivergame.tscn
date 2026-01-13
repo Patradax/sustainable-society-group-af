@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmi2wp5w7j1mq"]
-
-[ext_resource type="PackedScene" uid="uid://b8m84eoav7n24" path="res://rivertrash.tscn" id="1_cw2e7"]
-
-[node name="Node2D" type="Node2D"]
-
-[node name="rivertrash" parent="." instance=ExtResource("1_cw2e7")]
-position = Vector2(96, 584)
