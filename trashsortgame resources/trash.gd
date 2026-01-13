@@ -6,7 +6,8 @@ enum trashchoice {recycle, trash}
 
 
 func _ready() -> void:
-	var choice = randi_range(1,2)
+	var choice = randi_range(0,1)
+	print(choice)
 	if choice == 1:
 		trashtype = trashchoice.recycle
 		$Sprite2D.modulate = Color.SEA_GREEN
