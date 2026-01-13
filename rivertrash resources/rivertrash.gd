@@ -14,10 +14,10 @@ func _physics_process(delta: float) -> void:
 		position.y += movement * delta
 		position.x += speed * delta 
 	else:
-		print("dies")
+		print("dies") # kills the trash
 		queue_free()
 
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		health -= 1
+		health -= 1 

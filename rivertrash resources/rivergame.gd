@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var movingtrash = preload("res://rivertrash resources/rivertrash.tscn")
 
-func get_random_point_in_area() -> Vector2:
+func get_random_point_in_area() -> Vector2:  # randomly finds spot to spawn trash
 	var min_x = -320
 	var max_x = -64
 	var min_y = 256
@@ -11,11 +11,11 @@ func get_random_point_in_area() -> Vector2:
 	var random_y = randf_range(min_y, max_y)
 	return Vector2(random_x, random_y)
 	
-func _ready() -> void:
+func _ready() -> void: 
 	var coord = get_random_point_in_area()
 	print(coord)
 
-func spawn_trash():
+func spawn_trash():#teleports trash to coords upon spawn
 	var spawn_coord = get_random_point_in_area()
 	var rivertrash = movingtrash.instantiate()
 	rivertrash.global_position = spawn_coord
