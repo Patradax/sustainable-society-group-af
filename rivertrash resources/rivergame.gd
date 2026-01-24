@@ -1,6 +1,10 @@
 extends Node2D
 
+var score : int = 0
+
+@onready var score_text = $UI/score
 @onready var movingtrash = preload("res://rivertrash resources/rivertrash.tscn")
+@onready var timer = $Timer
 
 func get_random_point_in_area() -> Vector2:  # randomly finds spot to spawn trash
 	var min_x = -320
@@ -11,9 +15,10 @@ func get_random_point_in_area() -> Vector2:  # randomly finds spot to spawn tras
 	var random_y = randf_range(min_y, max_y)
 	return Vector2(random_x, random_y)
 	
-func _ready() -> void: 
-	var coord = get_random_point_in_area()
-	print(coord)
+func _ready() -> void:
+	update_score(0) 
+	timer.start()
+	pass
 
 func spawn_trash():#teleports trash to coords upon spawn
 	var spawn_coord = get_random_point_in_area()
@@ -22,7 +27,22 @@ func spawn_trash():#teleports trash to coords upon spawn
 	add_child(rivertrash)
 	pass
 
+func update_score(score_change):
+	score += score_change
+	score_text.text = "Score: " + str(score)
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("A"):
 		spawn_trash()
+
+func _on_timer_timeout() -> void:
+	spawn_trash()
+	timer.start()
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	update_score(-10)
+	body.queue_free()
+
+func _on_rivertrash_death() -> void:
+	update_score(50)

@@ -1,5 +1,4 @@
 extends Node2D
-
 @onready var trash_scene = preload("res://trashsortgame resources/trash.tscn")
 
 func _process(_delta: float) -> void:
@@ -17,7 +16,7 @@ func _on_trashcan_body_entered(body: Node2D) -> void:
 	if body.trashtype == $trashcan.bin_type:
 		print("right bin")
 	else:
-		print("wrong bin bin")
+		print("wrong bin")
 
 func _on_recyclebin_body_entered(body: Node2D) -> void:
 	print("Something in recycle bin")

@@ -7,6 +7,8 @@
 radius = 64.0
 
 [node name="rivertrash" type="CharacterBody2D"]
+collision_layer = 17
+collision_mask = 32
 input_pickable = true
 script = ExtResource("1_8n2e1")
 
