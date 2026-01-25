@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @onready var endpoint = $"../Area2D"
 
-signal death
 
 var freq = 20 # frequency of bounces (going up and down)
 var amp = 150 # range of bounces (going up and down)
@@ -24,7 +23,7 @@ func _physics_process(delta: float) -> void:
 		position.x += speed * delta 
 	else:
 		print("dies") # kills the trash
-		death.emit()
+		get_parent().update_score(50)
 		queue_free()
 
 

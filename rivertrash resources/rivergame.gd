@@ -9,15 +9,15 @@ var score : int = 0
 func get_random_point_in_area() -> Vector2:  # randomly finds spot to spawn trash
 	var min_x = -320
 	var max_x = -64
-	var min_y = 256
-	var max_y = 768
+	var min_y = 384
+	var max_y = 640
 	var random_x = randf_range(min_x, max_x)
 	var random_y = randf_range(min_y, max_y)
 	return Vector2(random_x, random_y)
-	
+
 func _ready() -> void:
 	update_score(0) 
-	timer.start()
+	timer.start()	
 	pass
 
 func spawn_trash():#teleports trash to coords upon spawn
@@ -43,6 +43,3 @@ func _on_timer_timeout() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	update_score(-10)
 	body.queue_free()
-
-func _on_rivertrash_death() -> void:
-	update_score(50)
