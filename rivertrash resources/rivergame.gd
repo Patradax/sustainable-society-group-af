@@ -1,42 +1,40 @@
 extends Node2D
 
-var score : int = 0
-
-@onready var score_text = $UI/score
 @onready var movingtrash = preload("res://rivertrash resources/rivertrash.tscn")
-@onready var timer = $Timer
-
-func get_random_point_in_area() -> Vector2:  # randomly finds spot to spawn trash
-	var min_x = -320
-	var max_x = -64
-	var min_y = 384
-	var max_y = 640
-	var random_x = randf_range(min_x, max_x)
-	var random_y = randf_range(min_y, max_y)
-	return Vector2(random_x, random_y)
+@onready var spawn_timer = Timer.new()
 
 func _ready() -> void:
-	update_score(0) 
-	timer.start()	
+	Global.reset_game()
+	add_child(spawn_timer)
+	spawn_timer.wait_time = 1.5 
+	spawn_timer.timeout.connect(spawn_trash)
+	spawn_timer.start()
 
-func spawn_trash():#teleports trash to coords upon spawn
-	var spawn_coord = get_random_point_in_area()
+func get_random_point_in_area() -> Vector2:
+	return Vector2(-100, randf_range(250, 700))
+
+func spawn_trash():
 	var rivertrash = movingtrash.instantiate()
-	rivertrash.global_position = spawn_coord
+	rivertrash.global_position = get_random_point_in_area()
 	add_child(rivertrash)
 
-func update_score(score_change):
-	score += score_change
-	score_text.text = "Score: " + str(score)
+func _process(_delta):
+	# Win condition
+	if Global.sustainability_score >= 100:
+		Global.reset_game()
+		get_tree().change_scene_to_file("res://game_menu.tscn")
 
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("A"):
-		spawn_trash()
+# --- QUIT LOGIC ---
+func _on_quit_button_pressed() -> void:
+	var dialog = find_child("QuitDialog")
+	if dialog:
+		dialog.dialog_text = "Score: " + str(Global.sustainability_score) + "\nQuit to Menu?"
+		dialog.popup_centered()
+		get_tree().paused = true
 
-func _on_timer_timeout() -> void:
-	spawn_trash()
-	timer.start()
+func _on_quit_dialog_confirmed() -> void:
+	Global.reset_game()
+	get_tree().change_scene_to_file("res://game_menu.tscn")
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	update_score(-10)
-	body.queue_free()
+func _on_quit_dialog_canceled() -> void:
+	get_tree().paused = false

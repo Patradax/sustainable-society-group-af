@@ -1,32 +1,33 @@
 extends CharacterBody2D
 
-@onready var endpoint = $"../Area2D"
-
-
-var freq = 20 # frequency of bounces (going up and down)
-var amp = 150 # range of bounces (going up and down)
-var time = 0 # consider as x axis in function
-var speed = 100 # speed of going to right
-var health = 5 #amount of clicks before it goes away
-
-func _ready() -> void:
-	freq = randi_range(10,20)
-	amp = randi_range(100, 500)
-	speed = randi_range(100, 500)
-	pass
+var freq = 2.0  # Lowered for a smooth water wave effect
+var amp = 50.0  # Range of the wave
+var time = 0.0 
+var speed = 150.0 
+var health = 3   # Reduced health so player finishes faster
 
 func _physics_process(delta: float) -> void:
-	if health >0:
+	if health > 0:
 		time += delta
-		var movement = cos(time * freq) * amp
-		position.y += movement * delta
-		position.x += speed * delta 
+		# Smooth sine wave movement
+		var wave = cos(time * freq) * amp
+		velocity.y = wave 
+		velocity.x = speed
+		move_and_slide()
+		
+		# If it goes off screen, delete it (failed to collect)
+		if global_position.x > 1200: 
+			queue_free()
 	else:
-		print("dies") # kills the trash
-		get_parent().update_score(50)
+		# Award points to Global score before disappearing
+		if Global:
+			Global.add_score(10)
 		queue_free()
 
-
-func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		health -= 1 
+func _on_input_event(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		health -= 1
+		# Visual feedback: flash red when hit
+		modulate = Color.RED
+		await get_tree().create_timer(0.1).timeout
+		modulate = Color.WHITE

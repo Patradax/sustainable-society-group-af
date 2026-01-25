@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs55fneb1qtax"]
+
+[ext_resource type="Script" uid="uid://b8k03s885kryb" path="res://score_popup.gd" id="1_qwwca"]
+
+[node name="ScorePopup" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("1_qwwca")

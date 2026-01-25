@@ -3,27 +3,31 @@ extends CharacterBody2D
 var is_grabbed : bool = false
 
 func _process(delta: float) -> void:
-	if is_grabbed: # makes rake follow mouse when grabbed
+	if is_grabbed:
+		# Smoothing the movement so it feels like a heavy rake
 		var mouse_pos = get_global_mouse_position()
-		global_position = lerp(global_position, mouse_pos, 20 * delta)
-		return
+		global_position = lerp(global_position, mouse_pos, 25 * delta)
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	# checks if colliding with leaf before doing anything
-	if body.is_in_group("leaf"):
-		var knockback_direction = (body.global_position - global_position).normalized()
-		body.apply_knockback(knockback_direction, 100, 0.12)
-		print(knockback_direction)
-
+func _input(event: InputEvent) -> void:
+	# This detects the mouse release EVEN IF the mouse moved off the rake
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			# Check if we clicked ON the rake to start dragging
+			# (Requires 'Input Pickable' to be ON in the Inspector)
+			pass 
+		else:
+			is_grabbed = false
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			is_grabbed = true
-			print("I've been grabbed")
-		else:
-			is_grabbed = false
-			print("I've been let go")
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("leaf"):
+		# Push the leaf away from the rake
+		var direction = (body.global_position - global_position).normalized()
+		body.apply_knockback(direction, 250, 0.15)
 
 
 # references
