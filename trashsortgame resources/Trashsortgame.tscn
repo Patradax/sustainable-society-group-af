@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://yned2ibt5vfl"]
 
-[ext_resource type="Script" uid="uid://tkdqk53ipjb4" path="res://trashsortgame resources/trashsortgame.gd" id="1_a7gly"]
-[ext_resource type="Texture2D" uid="uid://vpndphpx1ecf" path="res://icon.svg" id="2_slcpe"]
-[ext_resource type="Script" uid="uid://dcd5ebyd6lnpf" path="res://trashsortgame resources/binscript.gd" id="4_cxbqt"]
+[ext_resource type="Script" uid="uid://tkdqk53ipjb4" path="res://trashsortgame resources/trashsortgame.gd" id="1_q6pca"]
+[ext_resource type="Texture2D" uid="uid://vpndphpx1ecf" path="res://icon.svg" id="2_pwef4"]
+[ext_resource type="Script" uid="uid://dcd5ebyd6lnpf" path="res://trashsortgame resources/binscript.gd" id="3_so2pb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_slcpe"]
 size = Vector2(2136, 64)
@@ -13,8 +13,8 @@ size = Vector2(88, 1296)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cxbqt"]
 size = Vector2(320, 128)
 
-[node name="Trashsortgame" type="Node2D"]
-script = ExtResource("1_a7gly")
+[node name="trashsortgame" type="Node2D"]
+script = ExtResource("1_q6pca")
 
 [node name="borders" type="Node2D" parent="."]
 
@@ -27,7 +27,7 @@ metadata/_edit_group_ = true
 [node name="Sprite2D" type="Sprite2D" parent="borders/floor"]
 position = Vector2(1000, 32)
 scale = Vector2(16.625, 0.5)
-texture = ExtResource("2_slcpe")
+texture = ExtResource("2_pwef4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="borders/floor"]
 position = Vector2(908, 32)
@@ -42,7 +42,7 @@ metadata/_edit_group_ = true
 [node name="Sprite2D" type="Sprite2D" parent="borders/wall2"]
 position = Vector2(-12, -92.00006)
 scale = Vector2(0.56250006, 8.9375)
-texture = ExtResource("2_slcpe")
+texture = ExtResource("2_pwef4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="borders/wall2"]
 position = Vector2(-20, -112)
@@ -57,7 +57,7 @@ metadata/_edit_group_ = true
 [node name="Sprite2D" type="Sprite2D" parent="borders/wall1"]
 position = Vector2(-19.99997, -92.00006)
 scale = Vector2(0.6874996, 8.9375)
-texture = ExtResource("2_slcpe")
+texture = ExtResource("2_pwef4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="borders/wall1"]
 position = Vector2(-20, -112)
@@ -72,7 +72,7 @@ metadata/_edit_group_ = true
 [node name="Sprite2D" type="Sprite2D" parent="borders/ceiling"]
 position = Vector2(1000, 32)
 scale = Vector2(16.625, 0.5)
-texture = ExtResource("2_slcpe")
+texture = ExtResource("2_pwef4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="borders/ceiling"]
 position = Vector2(1004, 32)
@@ -80,14 +80,14 @@ shape = SubResource("RectangleShape2D_slcpe")
 
 [node name="recyclebin" type="Area2D" parent="."]
 position = Vector2(192, 960)
-script = ExtResource("4_cxbqt")
+script = ExtResource("3_so2pb")
 bin_type = 1
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="recyclebin"]
 position = Vector2(96, 0)
 scale = Vector2(2.5, 1)
-texture = ExtResource("2_slcpe")
+texture = ExtResource("2_pwef4")
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="recyclebin"]
@@ -96,13 +96,13 @@ shape = SubResource("RectangleShape2D_cxbqt")
 
 [node name="trashcan" type="Area2D" parent="."]
 position = Vector2(1536, 960)
-script = ExtResource("4_cxbqt")
+script = ExtResource("3_so2pb")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="trashcan"]
 position = Vector2(96, 0)
 scale = Vector2(2.5, 1)
-texture = ExtResource("2_slcpe")
+texture = ExtResource("2_pwef4")
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="trashcan"]
@@ -124,5 +124,23 @@ offset_right = 1045.0
 offset_bottom = 136.0
 text = "Press \"A\" to spawn a new trash"
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="QuitButton" type="Button" parent="CanvasLayer"]
+process_mode = 3
+offset_left = 1812.0
+offset_top = 65.0
+offset_right = 1856.0
+offset_bottom = 99.0
+text = "X"
+
+[node name="QuitDialog" type="ConfirmationDialog" parent="CanvasLayer"]
+process_mode = 3
+title = "Leave the game?"
+ok_button_text = "OK"
+
 [connection signal="body_entered" from="recyclebin" to="." method="_on_recyclebin_body_entered"]
 [connection signal="body_entered" from="trashcan" to="." method="_on_trashcan_body_entered"]
+[connection signal="pressed" from="CanvasLayer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="canceled" from="CanvasLayer/QuitDialog" to="." method="_on_quit_dialog_canceled"]
+[connection signal="confirmed" from="CanvasLayer/QuitDialog" to="." method="_on_quit_dialog_confirmed"]

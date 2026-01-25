@@ -1,17 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1fswq4twcgmt"]
+[gd_scene load_steps=6 format=3 uid="uid://c1fswq4twcgmt"]
 
 [ext_resource type="Script" uid="uid://durrbd1jpil3f" path="res://Sweepgame resources/sweepgame.gd" id="1_s0i5v"]
 [ext_resource type="PackedScene" uid="uid://bk5apypobfj8d" path="res://Sweepgame resources/rake.tscn" id="2_5dlpf"]
-[ext_resource type="PackedScene" uid="uid://c5guhdlqjsxf1" path="res://Sweepgame resources/leaf.tscn" id="3_55v16"]
+[ext_resource type="Script" uid="uid://8s15jdbfy8nk" path="res://Sweepgame resources/score_label.gd" id="4_5dlpf"]
 
-[node name="sweep" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5dlpf"]
+size = Vector2(1428.75, 243)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s0i5v"]
+
+[node name="sweepgame" type="Node2D"]
 script = ExtResource("1_s0i5v")
 
 [node name="rake" parent="." instance=ExtResource("2_5dlpf")]
-position = Vector2(932, 341)
-
-[node name="leaf" parent="." instance=ExtResource("3_55v16")]
-position = Vector2(456.99997, 483.99997)
+position = Vector2(906, 336)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -20,10 +22,177 @@ anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="Control"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+offset_left = 63.0
+offset_top = 10.0
+offset_right = 509.0
+offset_bottom = 71.0
+theme_override_colors/font_outline_color = Color(0.8550151, 0.99999994, 0.8398646, 1)
+theme_override_font_sizes/font_size = 30
+text = "Your Score :"
+script = ExtResource("4_5dlpf")
+
+[node name="QuitButton" type="Button" parent="CanvasLayer"]
+process_mode = 3
+offset_left = 1812.0
+offset_top = 65.0
+offset_right = 1856.0
+offset_bottom = 99.0
+text = "X"
+
+[node name="QuitDialog" type="ConfirmationDialog" parent="CanvasLayer"]
+process_mode = 3
+title = "Leave the game?"
+ok_button_text = "OK"
+
+[node name="GameOverPopup" type="Panel" parent="CanvasLayer"]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -348.5
+offset_top = -283.5
+offset_right = 348.5
+offset_bottom = 283.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimesUp" type="Label" parent="CanvasLayer/GameOverPopup"]
 layout_mode = 0
-offset_left = 817.0
-offset_top = 113.0
-offset_right = 1045.0
-offset_bottom = 136.0
-text = "Press \"A\" to spawn a new leaf"
+offset_right = 699.5
+offset_bottom = 105.5
+theme_override_font_sizes/font_size = 50
+text = "TIME'S UP!!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/GameOverPopup"]
+layout_mode = 0
+offset_left = 100.5
+offset_top = 134.5
+offset_right = 546.5
+offset_bottom = 195.5
+theme_override_colors/font_outline_color = Color(0.8550151, 0.99999994, 0.8398646, 1)
+theme_override_font_sizes/font_size = 30
+text = "Your Score :"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_5dlpf")
+
+[node name="Restart" type="Button" parent="CanvasLayer/GameOverPopup"]
+layout_mode = 0
+offset_left = 37.5
+offset_top = 379.5
+offset_right = 291.5
+offset_bottom = 456.5
+theme_override_font_sizes/font_size = 35
+text = "Play Again?"
+
+[node name="Exit" type="Button" parent="CanvasLayer/GameOverPopup"]
+layout_mode = 0
+offset_left = 382.5
+offset_top = 376.5
+offset_right = 619.5
+offset_bottom = 453.5
+theme_override_font_sizes/font_size = 35
+text = "Return"
+
+[node name="WinPopup" type="Panel" parent="CanvasLayer"]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -348.5
+offset_top = -283.5
+offset_right = 348.5
+offset_bottom = 283.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Win" type="Label" parent="CanvasLayer/WinPopup"]
+layout_mode = 0
+offset_right = 699.5
+offset_bottom = 105.5
+theme_override_font_sizes/font_size = 50
+text = "Park's Cleaned!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WinScoreLabel" type="Label" parent="CanvasLayer/WinPopup"]
+layout_mode = 0
+offset_left = 100.5
+offset_top = 134.5
+offset_right = 546.5
+offset_bottom = 195.5
+theme_override_colors/font_outline_color = Color(0.8550151, 0.99999994, 0.8398646, 1)
+theme_override_font_sizes/font_size = 30
+text = "Your Score :"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_5dlpf")
+
+[node name="Continue" type="Button" parent="CanvasLayer/WinPopup"]
+layout_mode = 0
+offset_left = 37.5
+offset_top = 379.5
+offset_right = 291.5
+offset_bottom = 456.5
+theme_override_font_sizes/font_size = 35
+text = "Continue"
+
+[node name="Exit" type="Button" parent="CanvasLayer/WinPopup"]
+layout_mode = 0
+offset_left = 382.5
+offset_top = 376.5
+offset_right = 619.5
+offset_bottom = 453.5
+theme_override_font_sizes/font_size = 35
+text = "Return"
+
+[node name="CompostBin" type="Area2D" parent="."]
+position = Vector2(615, 119)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CompostBin"]
+position = Vector2(294.375, 822.5)
+shape = SubResource("RectangleShape2D_5dlpf")
+
+[node name="Sprite2D" type="Sprite2D" parent="CompostBin/CollisionShape2D"]
+position = Vector2(-10.875026, 5.0000153)
+scale = Vector2(1406.9999, 243.00006)
+texture = SubResource("PlaceholderTexture2D_s0i5v")
+
+[node name="Tree1" type="Marker2D" parent="." groups=["TreeSpawn"]]
+position = Vector2(476, 504)
+
+[node name="Tree2" type="Marker2D" parent="." groups=["TreeSpawn"]]
+position = Vector2(1479, 504)
+
+[node name="Tree3" type="Marker2D" parent="." groups=["TreeSpawn"]]
+position = Vector2(213, 314)
+
+[node name="Tree4" type="Marker2D" parent="." groups=["TreeSpawn"]]
+position = Vector2(1620, 245)
+
+[node name="Tree5" type="Marker2D" parent="." groups=["TreeSpawn"]]
+position = Vector2(810, 733)
+
+[node name="Tree7" type="Marker2D" parent="." groups=["TreeSpawn"]]
+position = Vector2(201, 718)
+
+[connection signal="pressed" from="CanvasLayer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="canceled" from="CanvasLayer/QuitDialog" to="." method="_on_quit_dialog_canceled"]
+[connection signal="confirmed" from="CanvasLayer/QuitDialog" to="." method="_on_quit_dialog_confirmed"]
+[connection signal="pressed" from="CanvasLayer/GameOverPopup/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOverPopup/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="CanvasLayer/WinPopup/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="CanvasLayer/WinPopup/Exit" to="." method="_on_exit_pressed"]
+[connection signal="body_entered" from="CompostBin" to="." method="_on_compost_bin_body_entered"]

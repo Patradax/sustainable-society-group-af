@@ -30,7 +30,7 @@ corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_06t4h"]
 
-[node name="MainMenu" type="Control"]
+[node name="main_menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,27 +38,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7vrkn")
+metadata/_edit_vertical_guides_ = [663.0]
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Background" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -13.0
+offset_right = -7.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_7vrkn")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -133.5
-offset_top = 128.0
-offset_right = 133.5
-offset_bottom = 273.0
+anchors_preset = -1
+anchor_left = 0.43
+anchor_top = 0.573
+anchor_right = 0.43
+anchor_bottom = 0.573
+offset_left = -157.60004
+offset_top = 13.159973
+offset_right = 339.39996
+offset_bottom = 275.15997
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 5
@@ -105,24 +110,86 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_7vrkn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_06t4h")
 text = "Exit game"
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -157.0
-offset_top = -387.0
-offset_right = 157.0
-offset_bottom = -214.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 64
-text = "How to take care of your park!"
+[node name="SettingsPopup" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 633.0
+offset_top = 515.0
+offset_right = 1232.0
+offset_bottom = 797.0
+
+[node name="BackButton" type="Button" parent="SettingsPopup"]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 8.0
+offset_right = 588.0
+offset_bottom = 47.0
+text = "X"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPopup"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 29.0
+offset_right = 559.0
+offset_bottom = 478.0
+
+[node name="Settings" type="Label" parent="SettingsPopup/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
 horizontal_alignment = 1
+
+[node name="Volume" type="Label" parent="SettingsPopup/VBoxContainer"]
+layout_mode = 2
+text = "Volume"
+
+[node name="VolumeSlider" type="HSlider" parent="SettingsPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Brightness" type="Label" parent="SettingsPopup/VBoxContainer"]
+layout_mode = 2
+text = "Brightness"
+
+[node name="BrightnessSlider" type="HSlider" parent="SettingsPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Help" type="Button" parent="SettingsPopup/VBoxContainer"]
+layout_mode = 2
+text = "Help"
+
+[node name="HelpPopup" type="Panel" parent="SettingsPopup"]
+visible = false
+layout_mode = 0
+offset_left = 44.0
+offset_top = 88.0
+offset_right = 570.0
+offset_bottom = 392.0
+
+[node name="HowToPlay" type="Label" parent="SettingsPopup/HelpPopup"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 24.0
+offset_right = 484.0
+offset_bottom = 258.0
+text = "How to Play:
+
+River: Get rid of the trash that sapwn in the river.
+
+Trees: Click the rake to sweep the leaves.
+
+Sorting: Drag items to the correct bin."
+horizontal_alignment = 1
+
+[node name="Close" type="Button" parent="SettingsPopup/HelpPopup"]
+layout_mode = 0
+offset_left = 476.0
+offset_top = 2.0
+offset_right = 523.0
+offset_bottom = 39.0
+text = "X"
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="SettingsPopup/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="SettingsPopup/VBoxContainer/Help" to="." method="_on_help_pressed"]
+[connection signal="pressed" from="SettingsPopup/HelpPopup/Close" to="." method="_on_close_pressed"]

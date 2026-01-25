@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://d13ykbhf5jn0a"]
+[gd_scene load_steps=4 format=3 uid="uid://d13ykbhf5jn0a"]
 
+[ext_resource type="Script" uid="uid://c8twtkj7aaxy7" path="res://game_menu.gd" id="1_d0ubc"]
 [ext_resource type="Texture2D" uid="uid://dy4srwdbw46x6" path="res://images/Map_top.png" id="1_eilqm"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eilqm"]
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_d0ubc")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -22,4 +24,42 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_eilqm")
 
+[node name="RiverButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 849.0
+offset_top = 518.0
+offset_right = 1333.0
+offset_bottom = 589.0
+text = "Clean the river"
+
+[node name="TreeButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 196.0
+offset_top = 102.0
+offset_right = 359.0
+offset_bottom = 202.0
+text = "Sweep the leaves"
+
+[node name="TrashSortButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 1121.0
+offset_top = 71.0
+offset_right = 1315.0
+offset_bottom = 167.0
+mouse_default_cursor_shape = 2
+text = "Sort the trash"
+
+[node name="BackToMenu" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 1777.0
+offset_top = 1.0
+offset_right = 1916.0
+offset_bottom = 98.0
+text = "<-"
+
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+
+[connection signal="pressed" from="Panel/RiverButton" to="." method="_on_river_button_pressed"]
+[connection signal="pressed" from="Panel/TreeButton" to="." method="_on_tree_button_pressed"]
+[connection signal="pressed" from="Panel/TrashSortButton" to="." method="_on_trash_sort_button_pressed"]
+[connection signal="pressed" from="Panel/BackToMenu" to="." method="_on_back_to_menu_pressed"]
