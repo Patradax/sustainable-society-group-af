@@ -18,14 +18,12 @@ func get_random_point_in_area() -> Vector2:  # randomly finds spot to spawn tras
 func _ready() -> void:
 	update_score(0) 
 	timer.start()	
-	pass
 
 func spawn_trash():#teleports trash to coords upon spawn
 	var spawn_coord = get_random_point_in_area()
 	var rivertrash = movingtrash.instantiate()
 	rivertrash.global_position = spawn_coord
 	add_child(rivertrash)
-	pass
 
 func update_score(score_change):
 	score += score_change
@@ -38,7 +36,6 @@ func _input(_event: InputEvent) -> void:
 func _on_timer_timeout() -> void:
 	spawn_trash()
 	timer.start()
-
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	update_score(-10)
